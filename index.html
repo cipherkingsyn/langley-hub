@@ -155,9 +155,9 @@ const starsContainer = document.body;
 for (let i = 0; i < starCount; i++) {
   const star = document.createElement('div');
   star.classList.add('star');
-  star.style.top = `${Math.random() * 100}vh`;
-  star.style.left = `${Math.random() * 100}vw`;
-  star.style.animationDuration = `${Math.random() * 15 + 10}s`;
+  star.style.top = ${Math.random() * 100}vh;
+  star.style.left = ${Math.random() * 100}vw;
+  star.style.animationDuration = ${Math.random() * 15 + 10}s;
   starsContainer.appendChild(star);
 }
 
@@ -177,22 +177,27 @@ document.addEventListener('mousemove', function (e) {
     const dist = Math.sqrt(dx * dx + dy * dy);
     const force = 100 / (dist + 100);
 
-    star.style.transform = `translate(${dx * force}px, ${dy * force}px)`;
+    star.style.transform = translate(${dx * force}px, ${dy * force}px);
   });
 });
 
-// Jumpscare logic (triggers every visit)
-window.addEventListener('load', () => {
-  const jumpscare = document.getElementById('jumpscare');
-  jumpscare.style.display = 'block';
-  jumpscare.style.backgroundImage = "url('https://cdn.discordapp.com/attachments/914562535170523158/1083423499165607996/image.png')";
+// Jumpscare logic
+document.addEventListener('click', () => {
+  // Check if user has already been jumpscared
+  if (!localStorage.getItem('jumpscareDone')) {
+    const jumpscare = document.getElementById('jumpscare');
+    jumpscare.style.display = 'block';
+    jumpscare.style.backgroundImage = "url('https://cdn.discordapp.com/attachments/1301309415412203582/1314716279201992704/image.png?ex=6754c873&is=675376f3&hm=4b3f8a4c65cdbb9239b752f7a0e0bb95e8be0446e37dd41938233d8a62f651e0&')";
 
-  const screamAudio = new Audio('https://cdn.pixabay.com/download/audio/2023/03/08/audio_45535b38a0.mp3');
-  screamAudio.play();
+    const screamAudio = new Audio('https://freesound.org/data/previews/458/458736_902782-lq.mp3');
+    screamAudio.play();
 
-  setTimeout(() => {
-    jumpscare.style.display = 'none';
-  }, 3000);
+    setTimeout(() => {
+      jumpscare.style.display = 'none';
+    }, 3000);
+
+    localStorage.setItem('jumpscareDone', true);
+  }
 });
 </script>
 </body>
