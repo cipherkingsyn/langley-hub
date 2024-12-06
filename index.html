@@ -155,9 +155,9 @@ const starsContainer = document.body;
 for (let i = 0; i < starCount; i++) {
   const star = document.createElement('div');
   star.classList.add('star');
-  star.style.top = ${Math.random() * 100}vh;
-  star.style.left = ${Math.random() * 100}vw;
-  star.style.animationDuration = ${Math.random() * 15 + 10}s;
+  star.style.top = `${Math.random() * 100}vh`;
+  star.style.left = `${Math.random() * 100}vw`;
+  star.style.animationDuration = `${Math.random() * 15 + 10}s`;
   starsContainer.appendChild(star);
 }
 
@@ -177,7 +177,7 @@ document.addEventListener('mousemove', function (e) {
     const dist = Math.sqrt(dx * dx + dy * dy);
     const force = 100 / (dist + 100);
 
-    star.style.transform = translate(${dx * force}px, ${dy * force}px);
+    star.style.transform = `translate(${dx * force}px, ${dy * force}px)`;
   });
 });
 
@@ -187,7 +187,7 @@ document.addEventListener('click', () => {
   if (!localStorage.getItem('jumpscareDone')) {
     const jumpscare = document.getElementById('jumpscare');
     jumpscare.style.display = 'block';
-    jumpscare.style.backgroundImage = "url('https://cdn.discordapp.com/attachments/1301309415412203582/1314716279201992704/image.png?ex=6754c873&is=675376f3&hm=4b3f8a4c65cdbb9239b752f7a0e0bb95e8be0446e37dd41938233d8a62f651e0&')";
+    jumpscare.style.backgroundImage = "url('https://cdn.discordapp.com/attachments/1281410605680562311/1314722155300389015/image.png?ex=6754cdec&is=67537c6c&hm=486a5d3a1f0fa493ef34e01f3dd337c7cff1c11102d371a61e997e77538ff2d4&')";
 
     const screamAudio = new Audio('https://freesound.org/data/previews/458/458736_902782-lq.mp3');
     screamAudio.play();
