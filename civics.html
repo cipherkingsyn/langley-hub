@@ -1,1 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>civics</title>
+<style>
+body {
+margin: 0;
+padding: 0;
+overflow: hidden;
+background-color: #121212;
+color: #e0e0e0;
+font-family: 'Arial', sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+position: relative;
+}
 
+.container {
+text-align: center;
+padding: 30px;
+background-color: rgba(10, 10, 10);
+border-radius: 10px;
+box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+z-index: 1;
+position: relative;
+}
+
+h1 {
+color: #A8E63A;
+font-size: 3rem;
+margin-bottom: 40px;
+animation: fadeIn 1.5s ease-in-out;
+text-shadow: 0 0 15px rgba(168, 230, 58, 0.8);
+}
+
+.button-container {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+}
+
+.button {
+display: inline-block;
+padding: 15px 30px;
+font-size: 1.2rem;
+color: #A8E63A;
+background-color: #333;
+border: 2px solid #333;
+border-radius: 8px;
+cursor: pointer;
+text-decoration: none;
+transition: all 0.3s ease;
+animation: slideIn 0.8s ease-out;
+text-shadow: 0 0 5px rgba(168, 230, 58, 0.8);
+}
+
+.button:hover {
+background-color: #4caf50;
+border-color: #4caf50;
+box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+transform: translateY(-5px);
+text-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
+}
+
+.button:focus {
+outline: none;
+}
+
+.back-button {
+position: absolute;
+top: 10px;
+left: 13px;
+padding: 10px 20px;
+font-size: 1rem;
+color: #A8E63A;
+background-color: #333;
+border: 2px solid #333;
+border-radius: 8px;
+cursor: pointer;
+text-decoration: none;
+transition: all 0.3s ease;
+text-shadow: 0 0 5px rgba(168, 230, 58, 0.8);
+}
+
+.back-button:hover {
+background-color: #4caf50;
+border-color: #4caf50;
+box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+transform: translateY(-5px);
+text-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
+}
+
+@keyframes fadeIn {
+0% {
+opacity: 0;
+transform: translateY(-50px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes slideIn {
+0% {
+opacity: 0;
+transform: translateY(50px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+.star {
+position: absolute;
+background-color: #A8E63A;
+border-radius: 50%;
+animation: moveStars 10s linear infinite, sizeStars 2s ease-in-out infinite;
+}
+
+@keyframes moveStars {
+0% {
+transform: translate(0, 0);
+}
+100% {
+transform: translate(100vw, 100vh);
+}
+}
+
+@keyframes sizeStars {
+0% {
+width: 2px;
+height: 2px;
+}
+100% {
+width: 5px;
+height: 5px;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back-button">Back</a>
+<h1>civics</h1>
+<div class="button-container">
+<a href="https://cpsk12.instructure.com/courses/50202/modules" class="button" target="_blank">units</a>
+<a href="https://docs.google.com/document/d/1IMH5qbBzHJAUG90walcj-zX3WNBy34RGuI0pVdnvlyk/edit?usp=sharing" class="button" target="_blank">trackers</a>
+<a href="error.html" class="button">notes</a>
+<a href="https://docs.google.com/document/d/1AuDuT8_jklrD5ynO6N7sx3UflKnBLLu1pQL9VwPmaCM/edit?usp=sharing" class="button" target="_blank">brain breaks</a>
+<a href="https://docs.google.com/spreadsheets/d/1mANTDWyjfFPwiIlhtQJEjFfV5CawFbl2m1MAqRCAfYo/edit?gid=1206894943#gid=1206894943" class="button" target="_blank">waiting room</a>
+<a href="https://docs.google.com/spreadsheets/d/1mANTDWyjfFPwiIlhtQJEjFfV5CawFbl2m1MAqRCAfYo/edit?gid=1206894943#gid=1206894943" class="button" target="_blank">help!</a>
+</div>
+</div>
+
+<script>
+const starCount = 300;
+const starsContainer = document.body;
+
+for (let i = 0; i < starCount; i++) {
+const star = document.createElement('div');
+star.classList.add('star');
+star.style.top = `${Math.random() * 100}vh`;
+star.style.left = `${Math.random() * 100}vw`;
+star.style.animationDuration = `${Math.random() * 15 + 10}s`;
+starsContainer.appendChild(star);
+}
+
+document.addEventListener('mousemove', function(e) {
+const mouseX = e.clientX;
+const mouseY = e.clientY;
+
+const stars = document.querySelectorAll('.star');
+stars.forEach(star => {
+const starRect = star.getBoundingClientRect();
+const starX = starRect.left + starRect.width / 2;
+const starY = starRect.top + starRect.height / 2;
+
+const dx = mouseX - starX;
+const dy = mouseY - starY;
+const dist = Math.sqrt(dx * dx + dy * dy);
+const force = 100 / (dist + 100);
+
+star.style.transform = `translate(${dx * force}px, ${dy * force}px)`;
+});
+});
+</script>
+</body>
+</html>
