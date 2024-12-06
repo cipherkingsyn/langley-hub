@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,128 +8,131 @@
 <style>
 
 body {
-margin: 0;
-padding: 0;
-overflow: hidden;
-background-color: #121212;
-color: #e0e0e0;
-font-family: 'Arial', sans-serif;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
 }
-
 
 .container {
-text-align: center;
-padding: 30px;
-background-color: rgba(10, 10, 10);
-border-radius: 10px;
-box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-z-index: 1;
+  text-align: center;
+  padding: 30px;
+  background-color: rgba(10, 10, 10, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  z-index: 1;
 }
-
 
 h1 {
-color: #A8E63A;
-font-size: 3rem;
-margin-bottom: 40px;
-animation: fadeIn 1.5s ease-in-out;
-text-shadow: 0 0 15px rgba(168, 230, 58, 0.8);
+  color: #A8E63A;
+  font-size: 3rem;
+  margin-bottom: 40px;
+  animation: fadeIn 1.5s ease-in-out;
+  text-shadow: 0 0 15px rgba(168, 230, 58, 0.8);
 }
-
 
 .button-container {
-display: flex;
-justify-content: center;
-gap: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
-
 
 .button {
-display: inline-block;
-padding: 15px 30px;
-font-size: 1.2rem;
-color: #A8E63A;
-background-color: #333;
-border: 2px solid #333;
-border-radius: 8px;
-cursor: pointer;
-text-decoration: none;
-transition: all 0.3s ease;
-animation: slideIn 0.8s ease-out;
-text-shadow: 0 0 5px rgba(168, 230, 58, 0.8);
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  color: #A8E63A;
+  background-color: #333;
+  border: 2px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  animation: slideIn 0.8s ease-out;
+  text-shadow: 0 0 5px rgba(168, 230, 58, 0.8);
 }
-
 
 .button:hover {
-background-color: #4caf50;
-border-color: #4caf50;
-box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
-transform: translateY(-5px);
-text-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
+  background-color: #4caf50;
+  border-color: #4caf50;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+  transform: translateY(-5px);
+  text-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
 }
-
 
 .button:focus {
-outline: none;
+  outline: none;
 }
-
 
 @keyframes fadeIn {
-0% {
-opacity: 0;
-transform: translateY(-50px);
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-
 
 @keyframes slideIn {
-0% {
-opacity: 0;
-transform: translateY(50px);
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-
 
 .star {
-position: absolute;
-background-color: #A8E63A;
-border-radius: 50%;
-animation: moveStars 10s linear infinite, sizeStars 2s ease-in-out infinite;
+  position: absolute;
+  background-color: #A8E63A;
+  border-radius: 50%;
+  animation: moveStars 10s linear infinite, sizeStars 2s ease-in-out infinite;
 }
-
 
 @keyframes moveStars {
-0% {
-transform: translate(0, 0);
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(100vw, 100vh);
+  }
 }
-100% {
-transform: translate(100vw, 100vh);
-}
-}
-
 
 @keyframes sizeStars {
-0% {
-width: 2px;
-height: 2px;
+  0% {
+    width: 2px;
+    height: 2px;
+  }
+  100% {
+    width: 5px;
+    height: 5px;
+  }
 }
-100% {
-width: 5px;
-height: 5px;
+
+.jumpscare {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  z-index: 9999;
+  display: none;
 }
-}
+
 </style>
 </head>
 <body>
@@ -142,43 +144,60 @@ height: 5px;
 </div>
 </div>
 
+<!-- Jumpscare Element -->
+<div class="jumpscare" id="jumpscare"></div>
 
 <script>
-const starCount = 300
-
-;
+const starCount = 300;
 const starsContainer = document.body;
 
-
+// Create stars
 for (let i = 0; i < starCount; i++) {
-const star = document.createElement('div');
-star.classList.add('star');
-star.style.top = `${Math.random() * 100}vh`;
-star.style.left = `${Math.random() * 100}vw`;
-star.style.animationDuration = `${Math.random() * 15 + 10}s`;
-starsContainer.appendChild(star);
+  const star = document.createElement('div');
+  star.classList.add('star');
+  star.style.top = `${Math.random() * 100}vh`;
+  star.style.left = `${Math.random() * 100}vw`;
+  star.style.animationDuration = `${Math.random() * 15 + 10}s`;
+  starsContainer.appendChild(star);
 }
 
+// Star movement on mousemove
+document.addEventListener('mousemove', function (e) {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
 
-document.addEventListener('mousemove', function(e) {
-const mouseX = e.clientX;
-const mouseY = e.clientY;
+  const stars = document.querySelectorAll('.star');
+  stars.forEach((star) => {
+    const starRect = star.getBoundingClientRect();
+    const starX = starRect.left + starRect.width / 2;
+    const starY = starRect.top + starRect.height / 2;
 
+    const dx = mouseX - starX;
+    const dy = mouseY - starY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const force = 100 / (dist + 100);
 
-const stars = document.querySelectorAll('.star');
-stars.forEach(star => {
-const starRect = star.getBoundingClientRect();
-const starX = starRect.left + starRect.width / 2;
-const starY = starRect.top + starRect.height / 2;
-
-
-const dx = mouseX - starX;
-const dy = mouseY - starY;
-const dist = Math.sqrt(dx * dx + dy * dy);
-const force = 100 / (dist + 100);
-
-star.style.transform = `translate(${dx * force}px, ${dy * force}px)`;
+    star.style.transform = `translate(${dx * force}px, ${dy * force}px)`;
+  });
 });
+
+// Jumpscare logic
+document.addEventListener('click', () => {
+  // Check if user has already been jumpscared
+  if (!localStorage.getItem('jumpscareDone')) {
+    const jumpscare = document.getElementById('jumpscare');
+    jumpscare.style.display = 'block';
+    jumpscare.style.backgroundImage = "url('https://media.tenor.com/VYg5A8Ap5nYAAAAd/i-know-your-ip-address.gif')";
+
+    const screamAudio = new Audio('https://freesound.org/data/previews/458/458736_902782-lq.mp3');
+    screamAudio.play();
+
+    setTimeout(() => {
+      jumpscare.style.display = 'none';
+    }, 3000);
+
+    localStorage.setItem('jumpscareDone', true);
+  }
 });
 </script>
 </body>
